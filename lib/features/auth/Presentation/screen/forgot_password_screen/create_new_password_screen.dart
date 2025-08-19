@@ -11,9 +11,10 @@ import '../../../../../routes/app_routes.dart';
 import '../../../controller/forgot_password_controller/create_new_password_controller.dart';
 
 class CreateNewPasswordScreen extends StatelessWidget {
-   CreateNewPasswordScreen({super.key});
+  CreateNewPasswordScreen({super.key});
+  final String? email = Get.arguments;
 
-   final controller = Get.put(CreateNewPasswordController());
+  final controller = Get.put(CreateNewPasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppbar(
-                title: "Create New Password",
+              
                 centerTitle: true,
                 trailing: IconButton(
                   onPressed: () {
@@ -50,7 +51,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                 child: CustomText(
                   fontSize: 14,
                   text:
-                  'Your password must be different from  \n         previous used password',
+                      'Your password must be different from  \n         previous used password',
                   color: AppColors.textSecondary,
                 ),
               ),
@@ -63,12 +64,12 @@ class CreateNewPasswordScreen extends StatelessWidget {
                   prefixIcon: Icon(Icons.lock_outline_rounded),
                   suffixIcon: GestureDetector(
                     onTap: () => controller.obSecureText.value =
-                    !controller.obSecureText.value,
+                        !controller.obSecureText.value,
                     child: controller.obSecureText.value
                         ? Icon(
-                      Icons.visibility_off_outlined,
-                      color: Colors.grey,
-                    )
+                            Icons.visibility_off_outlined,
+                            color: Colors.grey,
+                          )
                         : Icon(Icons.visibility_outlined, color: Colors.grey),
                   ),
                 );
@@ -82,12 +83,12 @@ class CreateNewPasswordScreen extends StatelessWidget {
                   prefixIcon: Icon(Icons.lock_outline_rounded),
                   suffixIcon: GestureDetector(
                     onTap: () => controller.obSecureText2.value =
-                    !controller.obSecureText2.value,
+                        !controller.obSecureText2.value,
                     child: controller.obSecureText2.value
                         ? Icon(
-                      Icons.visibility_off_outlined,
-                      color: Colors.grey,
-                    )
+                            Icons.visibility_off_outlined,
+                            color: Colors.grey,
+                          )
                         : Icon(Icons.visibility_outlined, color: Colors.grey),
                   ),
                 );
@@ -128,7 +129,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
               CustomText(
                 color: AppColors.textSecondary,
                 text:
-                'Password changed successfully, you can login again with new password',
+                    'Password changed successfully, you can login again with new password',
                 textAlign: TextAlign.center,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,

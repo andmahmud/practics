@@ -6,13 +6,12 @@ import '../../../../../../core/common/widgets/custom_text.dart';
 import '../../../../../../core/common/widgets/custom_textformfield.dart';
 import '../../../../../../core/utils/constants/app_colors.dart';
 import '../../../../../core/common/widgets/custom_button.dart';
-import '../../../../../routes/app_routes.dart';
 import '../../../controller/forgot_password_controller/forgot_password_controller.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});
 
-   final controller = Get.put(ForgotPasswordController());
+  final controller = Get.put(ForgotPasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class ForgetPasswordScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppbar(
-                title: "Forgot Password?",
+               
                 centerTitle: true,
                 trailing: IconButton(
                   onPressed: () {
@@ -47,7 +46,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: CustomText(
                   text:
-                  'Enter your email, we will send a verification \n                     code to your email',
+                      'Enter your email, we will send a verification \n                     code to your email',
                   fontSize: 14.sp,
                   color: AppColors.textSecondary,
                 ),
@@ -62,7 +61,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               CustomButton(
                 text: 'Send Code',
                 onTap: () {
-                  Get.toNamed(AppRoute.forgotVerifyCodeScreen);
+                  controller.forgetpassword();
                 },
               ),
             ],

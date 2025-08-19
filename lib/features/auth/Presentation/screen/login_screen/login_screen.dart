@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:practics/core/utils/constants/app_sizer.dart';
 import '../../../../../core/common/widgets/custom_button.dart';
@@ -10,7 +9,6 @@ import '../../../../../core/utils/constants/app_colors.dart';
 import '../../../../../core/utils/constants/icon_path.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../controller/login_controller/login_controller.dart';
-
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -29,10 +27,10 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 16.h),
-                  CustomText(
-                    text: 'Welcome Back',
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w600,
+                CustomText(
+                  text: 'Welcome Back',
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w600,
                 ),
                 SizedBox(height: 6.h),
                 CustomText(text: 'Please enter your details'),
@@ -47,6 +45,15 @@ class LoginScreen extends StatelessWidget {
                 CustomTextField(
                   controller: controller.emailText,
                   hintText: 'Enter your email',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Email is required';
+                    }
+                    if (!GetUtils.isEmail(value.trim())) {
+                      return 'Enter a valid email';
+                    }
+                    return null;
+                  },
                   prefixIcon: Icon(Icons.email_outlined),
                 ),
                 SizedBox(height: 20.h),
@@ -92,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Log in',
                   onTap: () {
-                    _verifySuccessPopUp();
+                    controller.login();
                   },
                 ),
                 SizedBox(height: 32.h),
@@ -126,9 +133,18 @@ class LoginScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 14),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: AppColors.containerBorder,width: 1),
+                          border: Border.all(
+                            color: AppColors.containerBorder,
+                            width: 1,
+                          ),
                         ),
-                        child: Center(child: Image.asset(IconPath.googleIcon,height: 24.h,width: 24.w)),
+                        child: Center(
+                          child: Image.asset(
+                            IconPath.googleIcon,
+                            height: 24.h,
+                            width: 24.w,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(width: 8.h),
@@ -138,9 +154,18 @@ class LoginScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 14),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: AppColors.containerBorder,width: 1),
+                          border: Border.all(
+                            color: AppColors.containerBorder,
+                            width: 1,
+                          ),
                         ),
-                        child: Center(child: Image.asset(IconPath.appleIcon,height: 24.h,width: 24.w)),
+                        child: Center(
+                          child: Image.asset(
+                            IconPath.appleIcon,
+                            height: 24.h,
+                            width: 24.w,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -161,43 +186,4 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void _verifySuccessPopUp() {
-    showDialog(
-      context: Get.context!,
-      builder: (context) {
-        Future.delayed(Duration(seconds: 2), () {
-          Get.offAllNamed(AppRoute.navBar);
-        });
-        return AlertDialog(
-          backgroundColor: AppColors.white,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                IconPath.successIcon,
-                height: 120.h,
-                width: 120.w,
-              ),
-              SizedBox(height: 24.h),
-              CustomText(
-                text: 'Congratulations!',
-                textAlign: TextAlign.center,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-              ),
-              SizedBox(height: 8.h),
-              CustomText(
-                text:
-                'You have successfully logged in.',
-                textAlign: TextAlign.center,
-                color: AppColors.textSecondary,
-              ),
-              SizedBox(height: 24.h),
-              SpinKitFadingCircle(color: AppColors.primary),
-            ],
-          ),
-        );
-      },
-    );
-  }
 }

@@ -18,10 +18,10 @@ void main() async {
     ..indicatorSize = 45.0
     ..radius = 10.0
     ..userInteractions = false;
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
-        (value) {
-      Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
-      runApp(const MyApp());
-    },
-  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
+    value,
+  ) {
+    Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
+    runApp(const MyApp());
+  });
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
@@ -8,11 +7,12 @@ import '../../../../../core/common/widgets/custom_button.dart';
 import '../../../../../core/common/widgets/custom_rich_text.dart';
 import '../../../../../core/common/widgets/custom_text.dart';
 import '../../../../../core/utils/constants/app_colors.dart';
-import '../../../../../routes/app_routes.dart';
+
 import '../../../controller/forgot_password_controller/forgot_verify_code_controller.dart';
 
 class ForgotVerifyCodeScreen extends StatelessWidget {
   ForgotVerifyCodeScreen({super.key});
+  final String? email = Get.arguments;
 
   final controller = Get.put(ForgotVerifyCodeController());
 
@@ -27,7 +27,7 @@ class ForgotVerifyCodeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppbar(
-                title: "Verification Code",
+             
                 centerTitle: true,
                 trailing: IconButton(
                   onPressed: () {
@@ -50,7 +50,7 @@ class ForgotVerifyCodeScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: CustomText(
                   text:
-                  'Enter the verification code that we have sent \n                         to your email',
+                      'Enter the verification code that we have sent \n                         to your email',
                   color: AppColors.textSecondary,
                 ),
               ),
@@ -58,7 +58,7 @@ class ForgotVerifyCodeScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: Pinput(
-                  length: 4,
+                  length: 6,
                   controller: controller.otpText,
                   defaultPinTheme: PinTheme(
                     width: 48.w,
@@ -97,29 +97,29 @@ class ForgotVerifyCodeScreen extends StatelessWidget {
               CustomButton(
                 text: 'Continue',
                 onTap: () {
-                  Get.toNamed(AppRoute.createNewPasswordScreen);
+                    controller.verifyOtp(email ?? '');
                 },
               ),
               SizedBox(height: 24.h),
-              Obx(() => CustomRichText(
-                normalText: "Re-send code in: ",
-                tappableText: controller.formattedTime,
-                onTap: () {
-                  // Optional: Reset timer or resend logic
-                  if (controller.remainingSeconds.value == 0) {
-                    controller.startTimer();
-                    if (kDebugMode) {
-                      print("Resending OTP...");
-                    }
-                  }
-                },
-              ),
-              ),
+              Obx(() {
+                final canResend = controller.remainingSeconds.value == 0;
+
+                return CustomRichText(
+                  normalText: canResend
+                      ? "Didn't get code? "
+                      : "Re-send code in: ",
+                  tappableText: canResend ? "Resend" : controller.formattedTime,
+                  onTap: canResend
+                      ? () {
+                          controller.resendOtp(email ?? "");
+                        }
+                      : null, // Disable tap when countdown running
+                );
+              }),
             ],
           ),
         ),
       ),
     );
   }
-
 }

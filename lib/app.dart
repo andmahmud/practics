@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as foundation;
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:practics/routes/app_routes.dart';
 import 'core/bindings/controller_binder.dart';
 import 'core/utils/constants/app_sizer.dart';
@@ -35,9 +35,10 @@ class MyApp extends StatelessWidget {
               ? Transition.cupertino
               : Transition.fade,
           locale: Get.deviceLocale,
-          builder: (context, child) => PlatformUtils.isIOS
-              ? CupertinoTheme(data: const CupertinoThemeData(), child: child!)
-              : child!,
+           builder: EasyLoading.init(),
+          // builder: (context, child) => PlatformUtils.isIOS
+          //     ? CupertinoTheme(data: const CupertinoThemeData(), child: child!)
+          //     : child!,
         );
       },
     );

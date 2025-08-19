@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practics/core/utils/constants/app_sizer.dart';
 import 'package:practics/core/utils/constants/icon_path.dart';
-import '../../../../../core/common/widgets/custom_appbar.dart';
 import '../../../../../core/common/widgets/custom_button.dart';
 import '../../../../../core/common/widgets/custom_rich_text.dart';
 import '../../../../../core/common/widgets/custom_text.dart';
@@ -27,15 +26,6 @@ class SignUpScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomAppbar(
-                  trailing: IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(Icons.arrow_back),
-                  ),
-                ),
-                SizedBox(height: 16.h),
                 CustomText(
                   text: 'Create Your Account',
                   fontSize: 24.sp,
@@ -60,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
                   controller: controller.nameText,
                   hintText: 'Enter your full name',
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 15.h),
 
                 Align(
                   alignment: Alignment.centerLeft,
@@ -76,7 +66,7 @@ class SignUpScreen extends StatelessWidget {
                   controller: controller.familyNameText,
                   hintText: 'Enter your family name',
                 ),
-
+                SizedBox(height: 15.h),
                 CustomText(
                   text: "Email Address",
                   fontSize: 16.sp,
@@ -89,11 +79,24 @@ class SignUpScreen extends StatelessWidget {
                   controller: controller.emailText,
                   hintText: 'Enter your email address',
                 ),
+                SizedBox(height: 15.h),
+                CustomText(
+                  text: " User Name",
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),
 
-                SizedBox(height: 20.h),
+                SizedBox(height: 6.h),
+                CustomTextField(
+                  prefixIcon: Icon(Icons.person),
+                  controller: controller.userNameText,
+                  hintText: 'Enter your User Name',
+                ),
+
+                SizedBox(height: 15.h),
 
                 CustomText(
-                  text: "Confirm Password",
+                  text: " Password",
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                 ),
@@ -101,7 +104,7 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(height: 6.h),
                 Obx(() {
                   return CustomTextField(
-                    hintText: 'Confirm Password',
+                    hintText: ' Password',
                     controller: controller.passText,
                     obscureText: controller.obSecureText.value,
                     prefixIcon: Icon(Icons.lock_outline_rounded),
@@ -121,7 +124,7 @@ class SignUpScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Register',
                   onTap: () {
-                    Get.toNamed(AppRoute.verifyCodeScreen);
+                    controller.register();
                   },
                 ),
                 SizedBox(height: 30.h),
@@ -145,7 +148,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
