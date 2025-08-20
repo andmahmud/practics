@@ -6,8 +6,6 @@ import '../../../../../../core/common/widgets/custom_text.dart';
 import '../../../../../../core/common/widgets/custom_textformfield.dart';
 import '../../../../../../core/utils/constants/app_colors.dart';
 import '../../../../../core/common/widgets/custom_button.dart';
-import '../../../../../core/utils/constants/icon_path.dart';
-import '../../../../../routes/app_routes.dart';
 import '../../../controller/forgot_password_controller/create_new_password_controller.dart';
 
 class CreateNewPasswordScreen extends StatelessWidget {
@@ -27,7 +25,6 @@ class CreateNewPasswordScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppbar(
-              
                 centerTitle: true,
                 trailing: IconButton(
                   onPressed: () {
@@ -98,7 +95,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
               CustomButton(
                 text: 'Reset Password',
                 onTap: () {
-                  _verifySuccessPopUp();
+                  controller.resetPassword();
                 },
               ),
             ],
@@ -108,43 +105,4 @@ class CreateNewPasswordScreen extends StatelessWidget {
     );
   }
 
-  void _verifySuccessPopUp() {
-    showDialog(
-      context: Get.context!, // Or pass context if you're not using GetX
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: AppColors.scaffoldBGColor,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(IconPath.successIcon, height: 120.h),
-              SizedBox(height: 24.h),
-              CustomText(
-                text: 'Password Changed',
-                textAlign: TextAlign.center,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-              ),
-              SizedBox(height: 8.h),
-              CustomText(
-                color: AppColors.textSecondary,
-                text:
-                    'Password changed successfully, you can login again with new password',
-                textAlign: TextAlign.center,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-              ),
-              SizedBox(height: 24.h),
-              CustomButton(
-                text: 'Back to Log in',
-                onTap: () {
-                  Get.toNamed(AppRoute.loginScreen);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 }

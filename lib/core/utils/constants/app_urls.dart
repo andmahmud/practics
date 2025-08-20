@@ -9,4 +9,5 @@ class AppUrls {
 
   static const String forgetPassword = '$_baseUrl/auth/forgot-password/';
   static const String forgetverifyotp = '$_baseUrl/auth/validate-otp/';
+  static const String resetnewPassword = '$_baseUrl/auth/reset-password/';
 }

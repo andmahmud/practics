@@ -33,7 +33,7 @@ class ForgotPasswordController extends GetxController {
 
       log("Response Status Code: ${response.statusCode}");
 
-      if (response.statusCode == 200) {
+      if (response.isSuccess) {
         Get.toNamed(AppRoute.forgotVerifyCodeScreen, arguments: email);
       } else {
         if (kDebugMode) {

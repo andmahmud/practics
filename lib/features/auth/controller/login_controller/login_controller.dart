@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -92,7 +91,7 @@ class LoginController extends GetxController {
         EasyLoading.showError("Your account is not verified yet");
         Get.offAllNamed(AppRoute.verifyCodeScreen, arguments: email);
       } else {
-        EasyLoading.showError("Login failed: ${response.statusCode}");
+        EasyLoading.showError("Login Failed");
       }
     } catch (e) {
       EasyLoading.dismiss();

@@ -57,7 +57,6 @@ class ForgotVerifyCodeController extends GetxController {
       return;
     }
 
-
     final otp = otpText.text.trim();
     if (otp.isEmpty || otp.length < 6) {
       EasyLoading.showError("Invalid OTP. Please enter a valid number");
@@ -67,10 +66,7 @@ class ForgotVerifyCodeController extends GetxController {
     try {
       EasyLoading.show(status: "Verifying OTP...");
 
-      final requestBody = {
-        "email": email,
-        "otp": otp
-      };
+      final requestBody = {"email": email, "otp": otp};
 
       debugPrint("Request Body : $requestBody");
 
@@ -83,7 +79,11 @@ class ForgotVerifyCodeController extends GetxController {
       log("Response Status Code: ${response.statusCode}");
       log("Response Body: ${response.responseData}");
 
-      if (response.statusCode == 200) {
+      if (response.isSuccess) {
+        final token = response.responseData["data"]["reset_token"];
+        log("Reset token : $token");
+        StorageService().saveData('token', token);
+
         EasyLoading.showSuccess("OTP verified successfully.");
         _timer?.cancel();
         remainingSeconds.value = 0;
@@ -128,9 +128,4 @@ class ForgotVerifyCodeController extends GetxController {
       EasyLoading.dismiss();
     }
   }
-
-
-
-
-
 }
